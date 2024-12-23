@@ -1,6 +1,7 @@
 import sys
 
 def draw(grid, robot):
+    return
     for y, line in enumerate(grid):
         for x, c in enumerate(line):
             if (x,y) == robot:
@@ -35,14 +36,14 @@ def main():
 
     for move in moves:
         x, y = robot
-        print(move, x, y)
+        #print("move", move, x, y)
         if move == "^": dx, dy =  0, -1
         if move == "v": dx, dy =  0,  1
         if move == "<": dx, dy = -1,  0
         if move == ">": dx, dy =  1,  0
 
         if dy == 0:
-            print("L/R")
+            #print("L/R")
             steps = 1
             found_wall = False
             while True:
@@ -61,19 +62,19 @@ def main():
                     grid[y + dy * (i+1)][x + dx * (i+1)] = grid[y + dy * i][x + dx * i]
                 robot = (x + dx, y + dy)
         else:
-            print("U/D")
+            #print("U/D")
             steps = 1
             front = set([0])
             found_wall = False
             to_push = []
             while True:
-                print("steps", steps, front)
+                #print("steps", steps, front)
                 new_front = set()
                 found_box = False
                 for f in front:
                     px, py = x + dx * steps + f, y + dy * steps
                     p = grid[y + dy * steps][x + dx * steps + f]
-                    print("f", f, px, py, p)
+                    #print("f", f, px, py, p)
                     if p == "#":
                         found_wall = True
                         break
@@ -99,8 +100,12 @@ def main():
                     break
                 steps += 1
             if not found_wall:
-                print("pushing", to_push)
+                pushed = set()
+                #print("pushing", to_push)
                 for px, py in to_push[::-1]:
+                    if (px, py) in pushed:
+                        continue
+                    pushed.add((px, py))
                     grid[py + dy][px + dx] = grid[py][px]
                     grid[py][px] = "."
                 robot = (x + dx, y + dy)
