@@ -27,7 +27,6 @@ def main():
         inp = step(inp)
 
     print("⋆꙳•̩̩͙❅*̩̩͙‧͙   Advent of Code 2024  ‧͙*̩̩͙❆ ͙͛ ˚₊⋆\n")
-    print(1, sum(inp.values()))
-    print(2, None)
+    print(sum(inp.values()))
 
 main()
