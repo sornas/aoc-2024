@@ -55,12 +55,12 @@ def main():
         return region
 
     def perimiter(region):
-        peri = []
+        peri = set()
         for px, py in region:
             for dx, dy in [(-1,0),(1,0),(0,1),(0,-1)]:
                 p = (px+dx, py+dy)
                 if p not in region:
-                    peri.append((p, (dx,dy)))
+                    peri.add((p, (dx,dy)))
         merged_peri = []
         while peri:
             # take one out
@@ -71,7 +71,7 @@ def main():
             t2 = (-n[1], -n[0])
             # go both ways
             for tx, ty in [t1,t2]:
-                i = 0
+                i = 1
                 while True:
                     if (other := ((px+tx*i, py+ty*i), n)) in peri:
                         peri.remove(other)
@@ -82,22 +82,7 @@ def main():
             merged_peri.append(line)
         return merged_peri
 
-    for r in split_regions:
-        a = area(r)
-        p = perimiter(r)
-        print(inp[r[0][1]][r[0][0]], r, p, len(a), len(p), len(a) * len(p))
-        # for y in range(h):
-        #     for x in range(w):
-        #         xy = (x, y)
-        #         if xy in a:
-        #             print("#", end="")
-        #         elif xy in p:
-        #             print("+", end="")
-        #         else:
-        #             print(".", end="")
-        #     print()
-
     print("⋆꙳•̩̩͙❅*̩̩͙‧͙   Advent of Code 2024  ‧͙*̩̩͙❆ ͙͛ ˚₊⋆\n")
-    # print(sum(len(area(r)) * len(perimiter(r)) for r in split_regions))
+    print(sum(len(area(r)) * len(perimiter(r)) for r in split_regions))
 
 main()
