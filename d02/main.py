@@ -25,9 +25,9 @@ def main():
     for line in sys.stdin.readlines():
         nums = list(map(int, line.split()))
         if safe(nums):
-            s2 += 1
-        if damp_safe(nums):
             s1 += 1
+        if damp_safe(nums):
+            s2 += 1
 
     print(1, s1)
     print(2, s2)

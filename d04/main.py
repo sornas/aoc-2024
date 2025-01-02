@@ -14,7 +14,7 @@ def main():
         for dx, dy in itertools.product([-1,0,1],[-1,0,1]):
             if (dx, dy) == (0,0):
                 continue
-            if all(in_range(x+dx*ii, y+dy*ii) and i[y+dy*ii][x+dx*ii] == c for ii, c in enumerate("xmas")):
+            if all(in_range(x+dx*ii, y+dy*ii) and i[y+dy*ii][x+dx*ii] == c for ii, c in enumerate("XMAS")):
                 s += 1
         return s
 

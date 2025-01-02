@@ -1,16 +1,15 @@
 import itertools
 import sys
 
-def main():
-    inp = sys.stdin.readlines()
+def solve(inp, part):
     s = 0
     for i, line in enumerate(inp):
-        print(i, len(inp))
+        print(f"progress (part {part}): {i}/{len(inp)}")
         ans, nums = line.split(": ")
         ans = int(ans)
         nums = list(map(int, nums.split()))
         num_ops = len(nums)-1
-        for ops in itertools.product(["+", "*", "||"], repeat=num_ops):
+        for ops in itertools.product(["+", "*"] if part == 1 else ["+", "*", "||"], repeat=num_ops):
             # initial
             if ops[0] == "+":
                 rhs = nums[0] + nums[1]
@@ -26,12 +25,21 @@ def main():
                     rhs *= num
                 elif op == "||":
                     rhs = int(str(rhs) + str(num))
+                else:
+                    assert False, f"unknown op: '{op}'"
             if rhs == ans:
                 s += ans
                 break
+    return s
+
+def main():
+    inp = sys.stdin.readlines()
 
     print("⋆꙳•̩̩͙❅*̩̩͙‧͙   Advent of Code 2024  ‧͙*̩̩͙❆ ͙͛ ˚₊⋆\n")
-    print(1, None)
-    print(2, s)
+
+    s1 = solve(inp, 1)
+    s2 = solve(inp, 2)
+    print(1, s1)
+    print(2, s2)
 
 main()
