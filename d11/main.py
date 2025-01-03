@@ -22,11 +22,16 @@ def main():
                 new[stone * 2024] += amount
         return new
 
+    p1 = 0
     for i in range(75):
         print(i, len(inp), sum(inp.values()))
+        if i == 25:
+            p1 = sum(inp.values())
         inp = step(inp)
 
     print("⋆꙳•̩̩͙❅*̩̩͙‧͙   Advent of Code 2024  ‧͙*̩̩͙❆ ͙͛ ˚₊⋆\n")
-    print(sum(inp.values()))
+
+    print(1, p1)
+    print(2, sum(inp.values()))
 
 main()
